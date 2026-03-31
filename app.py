@@ -45,9 +45,38 @@ def listar_ordens():
     #Converte cada Row do SQLite em dicionário Python para serializar em Json
     return jsonify([dict(o) for o in ordens ])
 
+    
+#ROTA POR ID - BUSCAR UMA ORDEM ESPECIFICA PELO ID(GET)
+
+@app.route('/ordens/<int:ordem_id>', methods=['GET'])
+
+def buscar_ordem(ordem_id):
+    '''
+    Buscar uma única ordem de produção pelo ID.
+    
+    Parametros de URL:
+    - ordem id(int): ID da ordem a ser buscada.
+    
+    Retornar:
+        200 + JSON da ordem, se for encontrada.
+        404 + mensagem de erro, se não existir.
+    '''
+    conn = get_connection()
+    cursor = conn.cursor()
+    
+    #O '?' é substituido pelo valor de ordem_id de forma segura
+    cursor.execute('SELECT * FROM ordens WHERE id = ?', (ordem_id, ))
+    ordem = cursor.fetchone() #Retorna um único registro ou None
+    conn.close() 
+
+    if ordem is None:
+        return jsonify({'erro': f'Ordem {ordem_id} nao encontrada.'}), 404
+    return jsonify(dict(ordem)), 200
+
 #Ponto de Partida
 
 if __name__=='__main__':
     init_bd()
     
     app.run(debug=True, host='0.0.0.0', port=5000)
+    
