@@ -50,4 +50,4 @@ def init_bd():
     print("Banco de dados inicializado com sucesso!")
 
 
-init_bd()
+#init_bd()
