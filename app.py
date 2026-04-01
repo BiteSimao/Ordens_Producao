@@ -137,7 +137,7 @@ def criar_ordem():
     
     #201 - retornar "created" com o registro completo
     return jsonify(dict(nova_ordem)), 201
-   
+    
 #PONTO DE PARTIDA -------------------------------------------------------
 
 if __name__=='__main__':
