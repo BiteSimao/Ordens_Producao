@@ -32,7 +32,7 @@ def status():
         "sistema": "Sistema de ordem de Produção",
         "versao":"2.0.0",
         "total_ordens": resultado["total"],
-        "timestamp": datetime.datetime.now().strtime("%Y-%m-%d%H:%M:%S"),
+        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d%H:%M:%S"),
         "mensagem":"Ola, Fabrica, API FUNCIONANDO!"
     })
 #ROTA N3 - LISTAR TODAS AS ORDENS(GET) -----------------------------
